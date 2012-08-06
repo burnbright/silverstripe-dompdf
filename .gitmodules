@@ -1,0 +1,3 @@
+[submodule "thirdparty/dompdf"]
+	path = thirdparty/dompdf
+	url = git@github.com:shadowhand/dompdf.git
