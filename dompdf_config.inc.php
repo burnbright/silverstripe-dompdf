@@ -4,29 +4,9 @@ define("DOMPDF_DIR", str_replace(DIRECTORY_SEPARATOR, '/', BASE_PATH."/dompdf/th
 
 define("DOMPDF_INC_DIR", DOMPDF_DIR . "/include");
 define("DOMPDF_LIB_DIR", DOMPDF_DIR . "/lib");
-define("DOMPDF_FONT_DIR", DOMPDF_DIR . "/lib/fonts/");
-define("DOMPDF_FONT_CACHE", DOMPDF_FONT_DIR);
-define("DOMPDF_TEMP_DIR", TEMP_FOLDER."/dompdf");
-define("DOMPDF_UNICODE_ENABLED", true);
-define("DOMPDF_PDF_BACKEND", "CPDF");
-define("DOMPDF_DEFAULT_MEDIA_TYPE", "screen");
-define("DOMPDF_DEFAULT_PAPER_SIZE", "A4");
-define("DOMPDF_DEFAULT_FONT", "serif");
-define("DOMPDF_DPI", 96);
-define("DOMPDF_ENABLE_PHP", false);
-define("DOMPDF_ENABLE_JAVASCRIPT", true);
-define("DOMPDF_ENABLE_REMOTE", true);
-define("DOMPDF_LOG_OUTPUT_FILE", DOMPDF_FONT_DIR."log.htm");
-define("DOMPDF_FONT_HEIGHT_RATIO", 1.1);
-define("DOMPDF_ENABLE_CSS_FLOAT", true);
 
 require_once(DOMPDF_INC_DIR . "/functions.inc.php");
 
-/**
- * Username and password used by the configuration utility in www/
- */
-def("DOMPDF_ADMIN_USERNAME", "user");
-def("DOMPDF_ADMIN_PASSWORD", "password");
 
 /**
  * The location of the DOMPDF font directory
@@ -55,7 +35,7 @@ def("DOMPDF_ADMIN_PASSWORD", "password");
  *
  * *Please note the trailing slash.*
  */
-def("DOMPDF_FONT_DIR", DOMPDF_DIR . "/lib/fonts/");
+define("DOMPDF_FONT_DIR", DOMPDF_DIR . "/lib/fonts/");
 
 /**
  * The location of the DOMPDF font cache directory
@@ -65,7 +45,7 @@ def("DOMPDF_FONT_DIR", DOMPDF_DIR . "/lib/fonts/");
  * It contains the .afm files, on demand parsed, converted to php syntax and cached
  * This folder can be the same as DOMPDF_FONT_DIR
  */
-def("DOMPDF_FONT_CACHE", DOMPDF_FONT_DIR);
+define("DOMPDF_FONT_CACHE", TEMP_FOLDER."/dompdf/fontcache");
 
 /**
  * The location of a temporary directory.
@@ -74,7 +54,7 @@ def("DOMPDF_FONT_CACHE", DOMPDF_FONT_DIR);
  * The temporary directory is required to download remote images and when
  * using the PFDLib back end.
  */
-def("DOMPDF_TEMP_DIR", sys_get_temp_dir());
+define("DOMPDF_TEMP_DIR", TEMP_FOLDER."/dompdf/tmp");
 
 /**
  * ==== IMPORTANT ====
@@ -88,7 +68,7 @@ def("DOMPDF_TEMP_DIR", sys_get_temp_dir());
  * direct class use like:
  * $dompdf = new DOMPDF();	$dompdf->load_html($htmldata); $dompdf->render(); $pdfdata = $dompdf->output();
  */
-def("DOMPDF_CHROOT", realpath(DOMPDF_DIR));
+define("DOMPDF_CHROOT", realpath(DOMPDF_DIR));
 
 /**
  * Whether to use Unicode fonts or not.
@@ -99,12 +79,12 @@ def("DOMPDF_CHROOT", realpath(DOMPDF_DIR));
  * When enabled, dompdf can support all Unicode glyphs.  Any glyphs used in a
  * document must be present in your fonts, however.
  */
-def("DOMPDF_UNICODE_ENABLED", true);
+define("DOMPDF_UNICODE_ENABLED", true);
 
 /**
  * Whether to make font subsetting or not.
  */
-def("DOMPDF_ENABLE_FONTSUBSETTING", false);
+define("DOMPDF_ENABLE_FONTSUBSETTING", false);
 
 /**
  * The PDF rendering backend to use
@@ -134,7 +114,7 @@ def("DOMPDF_ENABLE_FONTSUBSETTING", false);
  * @link http://www.ros.co.nz/pdf
  * @link http://www.php.net/image
  */
-def("DOMPDF_PDF_BACKEND", "CPDF");
+define("DOMPDF_PDF_BACKEND", "CPDF");
 
 /**
  * PDFlib license key
@@ -160,7 +140,7 @@ def("DOMPDF_PDF_BACKEND", "CPDF");
  * the desired content might be different (e.g. screen or projection view of html file).
  * Therefore allow specification of content here.
  */
-def("DOMPDF_DEFAULT_MEDIA_TYPE", "screen");
+define("DOMPDF_DEFAULT_MEDIA_TYPE", "screen");
 
 /**
  * The default paper size.
@@ -169,7 +149,7 @@ def("DOMPDF_DEFAULT_MEDIA_TYPE", "screen");
  *
  * @see CPDF_Adapter::PAPER_SIZES for valid sizes
  */
-def("DOMPDF_DEFAULT_PAPER_SIZE", "letter");
+define("DOMPDF_DEFAULT_PAPER_SIZE", "A4");
 
 /**
  * The default font family
@@ -177,7 +157,7 @@ def("DOMPDF_DEFAULT_PAPER_SIZE", "letter");
  * Used if no suitable fonts can be found. This must exist in the font folder.
  * @var string
  */
-def("DOMPDF_DEFAULT_FONT", "serif");
+define("DOMPDF_DEFAULT_FONT", "serif");
 
 /**
  * Image DPI setting
@@ -212,7 +192,7 @@ def("DOMPDF_DEFAULT_FONT", "serif");
  *
  * @var int
  */
-def("DOMPDF_DPI", 96);
+define("DOMPDF_DPI", 96);
 
 /**
  * Enable inline PHP
@@ -226,7 +206,7 @@ def("DOMPDF_DPI", 96);
  *
  * @var bool
  */
-def("DOMPDF_ENABLE_PHP", false);
+define("DOMPDF_ENABLE_PHP", false);
 
 /**
  * Enable inline Javascript
@@ -236,7 +216,7 @@ def("DOMPDF_ENABLE_PHP", false);
  *
  * @var bool
  */
-def("DOMPDF_ENABLE_JAVASCRIPT", true);
+define("DOMPDF_ENABLE_JAVASCRIPT", true);
 
 /**
  * Enable remote file access
@@ -255,18 +235,19 @@ def("DOMPDF_ENABLE_JAVASCRIPT", true);
  *
  * @var bool
  */
-def("DOMPDF_ENABLE_REMOTE", false);
+define("DOMPDF_ENABLE_REMOTE", true);
 
 /**
  * The debug output log
  * @var string
  */
-def("DOMPDF_LOG_OUTPUT_FILE", DOMPDF_FONT_DIR."log.htm");
+define("DOMPDF_LOG_OUTPUT_FILE", DOMPDF_FONT_DIR."log.htm");
+
 
 /**
  * A ratio applied to the fonts height to be more like browsers' line height
  */
-def("DOMPDF_FONT_HEIGHT_RATIO", 1.1);
+define("DOMPDF_FONT_HEIGHT_RATIO", 1.1);
 
 /**
  * Enable CSS float
@@ -274,19 +255,19 @@ def("DOMPDF_FONT_HEIGHT_RATIO", 1.1);
  * Allows people to disabled CSS float support
  * @var bool
  */
-def("DOMPDF_ENABLE_CSS_FLOAT", false);
+define("DOMPDF_ENABLE_CSS_FLOAT", true);
 
 /**
  * Prepend the DOMPDF autoload function the spl_autoload stack
  *
  * @var bool
  */
-def("DOMPDF_AUTOLOAD_PREPEND", false);
+define("DOMPDF_AUTOLOAD_PREPEND", false);
 
 /**
  * Use the more-than-experimental HTML5 Lib parser
  */
-def("DOMPDF_ENABLE_HTML5PARSER", false);
+define("DOMPDF_ENABLE_HTML5PARSER", false);
 require_once(DOMPDF_LIB_DIR . "/html5lib/Parser.php");
 
 // ### End of user-configurable options ###
@@ -340,15 +321,15 @@ $_DOMPDF_DEBUG_TYPES = array(); //array("page-break" => 1);
 * E.g. on repeated display of same pdf in browser when pdf is not taken out of
 * the browser cache and the premature output prevents setting of the mime type.
 */
-def('DEBUGPNG', false);
-def('DEBUGKEEPTEMP', false);
-def('DEBUGCSS', true);
+define('DEBUGPNG', false);
+define('DEBUGKEEPTEMP', false);
+define('DEBUGCSS', true);
 
 /* Layout debugging. Will display rectangles around different block levels.
  * Visible in the PDF itself.
 */
-def('DEBUG_LAYOUT', false);
-def('DEBUG_LAYOUT_LINES', true);
-def('DEBUG_LAYOUT_BLOCKS', true);
-def('DEBUG_LAYOUT_INLINE', true);
-def('DEBUG_LAYOUT_PADDINGBOX', true);
+define('DEBUG_LAYOUT', false);
+define('DEBUG_LAYOUT_LINES', true);
+define('DEBUG_LAYOUT_BLOCKS', true);
+define('DEBUG_LAYOUT_INLINE', true);
+define('DEBUG_LAYOUT_PADDINGBOX', true);
