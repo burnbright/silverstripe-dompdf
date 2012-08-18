@@ -13,6 +13,7 @@ class SS_DOMPDF{
 		require_once(DOMPDF_INC_DIR . "/autoload.inc.php");
 		$this->dompdf = new DOMPDF();
 		$this->dompdf->set_base_path(BASE_PATH);
+		$this->dompdf->set_host(Director::absoluteBaseURL());
 	}
 	
 	public function set_paper($size, $orientation){
@@ -36,12 +37,13 @@ class SS_DOMPDF{
 	}
 	
 	public function stream($outfile, $options = ''){
-		return $this->dompdf->stream($outfile, $options);
+		return $this->dompdf->stream($this->addFileExt($outfile), $options);
 	}
 	
 	public function toFile($filename = "file",$folder = "PDF"){
-		$filedir = ASSETS_DIR."/$folder/$filename.pdf";
-		$filepath = ASSETS_PATH.DIRECTORY_SEPARATOR.$folder.DIRECTORY_SEPARATOR.$filename.".pdf";
+		$filename = $this->addFileExt($filename);
+		$filedir = ASSETS_DIR."/$folder/$filename";
+		$filepath = ASSETS_PATH.DIRECTORY_SEPARATOR.$folder.DIRECTORY_SEPARATOR.$filename;
 		$folder = Folder::find_or_make($folder);
 		$output = $this->output();
 		if($fh = fopen($filepath, 'w')) {
@@ -54,6 +56,21 @@ class SS_DOMPDF{
 		$file->ParentID = $folder->ID;
 		$file->write();
 		return $file;
+	}
+	
+	function addFileExt($filename, $new_extension = 'pdf') {
+	    $info = pathinfo($filename);
+	    return $info['filename'] . '.' . $new_extension;
+	}
+	
+	/**
+	 * uesful function that streams the pdf to the browser,
+	 * with correct headers, and ends php execution.
+	 */
+	public function streamdebug(){
+		header('Content-type: application/pdf');
+		$this->stream('debug',array('Attachment' => 0));
+		die();
 	}
 	
 }
