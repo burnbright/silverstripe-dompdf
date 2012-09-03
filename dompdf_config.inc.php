@@ -323,7 +323,7 @@ $_DOMPDF_DEBUG_TYPES = array(); //array("page-break" => 1);
 */
 define('DEBUGPNG', false);
 define('DEBUGKEEPTEMP', false);
-define('DEBUGCSS', true);
+define('DEBUGCSS', false);
 
 /* Layout debugging. Will display rectangles around different block levels.
  * Visible in the PDF itself.
