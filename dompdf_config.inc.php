@@ -1,11 +1,14 @@
 <?php 
 
-define("DOMPDF_DIR", str_replace(DIRECTORY_SEPARATOR, '/', BASE_PATH."/dompdf/thirdparty/dompdf/dompdf"));
+define("DOMPDF_DIR", str_replace(DIRECTORY_SEPARATOR, '/', BASE_PATH."/dompdf/thirdparty/dompdf"));
 
 define("DOMPDF_INC_DIR", DOMPDF_DIR . "/include");
 define("DOMPDF_LIB_DIR", DOMPDF_DIR . "/lib");
 
 require_once(DOMPDF_INC_DIR . "/functions.inc.php");
+
+define("DOMPDF_ADMIN_USERNAME", "");
+define("DOMPDF_ADMIN_PASSWORD", "");
 
 
 /**

@@ -59,6 +59,9 @@ class SS_DOMPDF{
 	}
 	
 	function addFileExt($filename, $new_extension = 'pdf') {
+		if(strpos($filename, ".".$new_extension)){
+			return $filename;
+		}
 	    $info = pathinfo($filename);
 	    return $info['filename'] . '.' . $new_extension;
 	}
