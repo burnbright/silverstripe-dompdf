@@ -271,7 +271,7 @@ define("DOMPDF_AUTOLOAD_PREPEND", false);
  * Use the more-than-experimental HTML5 Lib parser
  */
 define("DOMPDF_ENABLE_HTML5PARSER", false);
-require_once(DOMPDF_LIB_DIR . "/html5lib/Parser.php");
+//require_once(DOMPDF_LIB_DIR . "/html5lib/Parser.php"); //this will conflict with existing lib @ framework/thirdparty/html5lib
 
 // ### End of user-configurable options ###
 
